@@ -1,0 +1,51 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shape Calculator</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+        <script>
+            $('#rectangleForm').validate();
+            $('#circleForm').validate();
+            $('#triangleForm').validate();
+        </script>
+    </head>
+    <body>
+        <form id="rectangleForm" action="ShapeCalculator" method="GET">
+            <input type="hidden" name="s" value="0"/>
+            Calculate the area of a rectangle by providing the:
+            <ul>
+                <li>Length: <input name="length" placeholder="Length" required /></li>
+                <li>Width: <input name="width" placeholder="Width" required /></li>
+            </ul>
+            <input type="submit" value="Calculate"/>
+        </form>
+        <hr>
+        <form id="circleForm" action="ShapeCalculator" method="GET">
+            <input type="hidden" name="s" value="1"/>
+            Calculate the area of a circle by providing the:
+            <ul>
+                <li>Radius: <input name="radius" placeholder="Radius" required /></li>
+            </ul>
+            <input type="submit" value="Calculate"/>
+        </form>
+        <hr>
+        <form id="triangleForm" action="ShapeCalculator" method="GET">
+            <input type="hidden" name="s" value="2"/>
+            Calculate the length of a side of a triangle by providing the length of 2 sides:
+            
+            <ul>
+                <li style="list-style-type: none;"><img src="img/abctriangle.png"/></li>
+                <li>Side A: <input name="a" placeholder="A"/></li>
+                <li>Side B: <input name="b" placeholder="B"/></li>
+                <li>Side C: <input name="c" placeholder="C"/></li>
+            </ul>
+            <input type="submit" value="Calculate"/>
+        </form>
+    </body>
+</html>
