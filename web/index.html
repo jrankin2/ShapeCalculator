@@ -7,38 +7,128 @@ and open the template in the editor.
     <head>
         <title>Shape Calculator</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css"/>
+        <!--
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+        -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+        <style>
+            #tabs{
+                width:400px;
+            }
+            
+            input.error{
+                border:1px solid red;
+            }
+            
+            label.error{
+                color:red;
+            }
+            
+        </style>
     </head>
     <body>
-        <form id="rectangleForm" action="ShapeCalculator" method="GET">
-            <input type="hidden" name="s" value="0"/>
-            Calculate the area of a rectangle by providing the:
+        <div id="tabs">
             <ul>
-                <li>Length: <input name="length" placeholder="Length"/></li>
-                <li>Width: <input name="width" placeholder="Width"/></li>
+                <li><a href="#tab-1">Rectangle</a></li>
+                <li><a href="#tab-2">Circle</a></li>
+                <li><a href="#tab-3">Triangle</a></li>
             </ul>
-            <input type="submit" value="Calculate"/>
-        </form>
-        <hr>
-        <form id="circleForm" action="ShapeCalculator" method="GET">
-            <input type="hidden" name="s" value="1"/>
-            Calculate the area of a circle by providing the:
-            <ul>
-                <li>Radius: <input name="radius" placeholder="Radius"/></li>
-            </ul>
-            <input type="submit" value="Calculate"/>
-        </form>
-        <hr>
-        <form id="triangleForm" action="ShapeCalculator" method="GET">
-            <input type="hidden" name="s" value="2"/>
-            Calculate the length of a side of a triangle by providing the length of 2 sides:
-            
-            <ul>
-                <li style="list-style-type: none;"><img src="img/abctriangle.png"/></li>
-                <li>Side A: <input name="a" placeholder="A"/></li>
-                <li>Side B: <input name="b" placeholder="B"/></li>
-                <li>Side C: <input name="c" placeholder="C"/></li>
-            </ul>
-            <input type="submit" value="Calculate"/>
-        </form>
+
+            <div id="tab-1">
+                <form id="rectangleForm" action="ShapeCalculator" method="GET">
+                    <input type="hidden" name="s" value="0"/>
+                    Calculate the area of a rectangle by providing the:
+                    <ul>
+                        <li>Length: <input id="length" name="length" type="text" placeholder="Length" required /></li>
+                        <li>Width: <input name="width" placeholder="Width" required /></li>
+                    </ul>
+                    <input type="submit" value="Calculate"/>
+                </form>
+            </div>
+            <div id="tab-2">
+                <form id="circleForm" action="ShapeCalculator" method="GET">
+                    <input type="hidden" name="s" value="1"/>
+                    Calculate the area of a circle by providing the:
+                    <ul>
+                        <li>Radius: <input name="radius" placeholder="Radius" required /></li>
+                    </ul>
+                    <input type="submit" value="Calculate"/>
+                </form>
+            </div>
+            <div id="tab-3">
+                <form id="triangleForm" action="ShapeCalculator" method="GET">
+                    <input type="hidden" name="s" value="2"/>
+                    Calculate the length of a side of a triangle by providing the length of 2 sides:
+                    <ul>
+                        <li style="list-style-type: none;"><img src="img/abctriangle.png"/></li>
+                        <li>Side A: <input name="a" placeholder="A"/></li>
+                        <li>Side B: <input name="b" placeholder="B"/></li>
+                        <li>Side C: <input name="c" placeholder="C"/></li>
+                    </ul>
+                    <input type="submit" value="Calculate"/>
+                </form>
+            </div>
+
+        </div>
+
+
+        <script>
+            //tabs
+            $(function() {
+                $('#tabs').tabs();
+            });
+
+            //validation
+            var requiredNumberRules = {required: true, range: [1, 999]};
+            var nonRequiredNumberRules = {required: false, range: [1, 999]};
+            var customSubmitHandler = function(form) {
+                console.log(form.id);
+                
+                $.get(form.action, $(form).serialize(), function(data){
+                    //alert(data);
+                    var dialogContainer = $('#dialog-modal');
+                    if($('#dialog-modal').length < 1){
+                        $('<div/>')
+                            .attr({'id':'dialog-modal', title:'Calculator Results'})
+                            .appendTo(document.body);
+                    }
+                    $('#dialog-modal').html(data);//set the html
+                    $('#dialog-modal').dialog({
+                        height:200,
+                        width:300,
+                        modal:true
+                    });
+                });
+            };
+
+            jQuery.validator.setDefaults({
+                debug: true,
+                submitHandler: customSubmitHandler
+            });
+
+            $('#rectangleForm').validate({
+                rules: {
+                    length: requiredNumberRules,
+                    width: requiredNumberRules
+                }
+            });
+            $('#circleForm').validate({
+                rules: {
+                    radius: requiredNumberRules
+                }
+            });
+            $('#triangleForm').validate({
+                rules: {
+                    a: nonRequiredNumberRules,
+                    b: nonRequiredNumberRules,
+                    c: nonRequiredNumberRules
+                }
+            });
+        </script>
+
     </body>
 </html>

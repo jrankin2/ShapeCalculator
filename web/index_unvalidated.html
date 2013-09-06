@@ -7,21 +7,14 @@ and open the template in the editor.
     <head>
         <title>Shape Calculator</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
-        <script>
-            $('#rectangleForm').validate();
-            $('#circleForm').validate();
-            $('#triangleForm').validate();
-        </script>
     </head>
     <body>
         <form id="rectangleForm" action="ShapeCalculator" method="GET">
             <input type="hidden" name="s" value="0"/>
             Calculate the area of a rectangle by providing the:
             <ul>
-                <li>Length: <input name="length" placeholder="Length" required /></li>
-                <li>Width: <input name="width" placeholder="Width" required /></li>
+                <li>Length: <input name="length" placeholder="Length"/></li>
+                <li>Width: <input name="width" placeholder="Width"/></li>
             </ul>
             <input type="submit" value="Calculate"/>
         </form>
@@ -30,7 +23,7 @@ and open the template in the editor.
             <input type="hidden" name="s" value="1"/>
             Calculate the area of a circle by providing the:
             <ul>
-                <li>Radius: <input name="radius" placeholder="Radius" required /></li>
+                <li>Radius: <input name="radius" placeholder="Radius"/></li>
             </ul>
             <input type="submit" value="Calculate"/>
         </form>
