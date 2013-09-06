@@ -6,10 +6,19 @@ and open the template in the editor.
 <html>
     <head>
         <title>Shape Calculator</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/dot-luv/jquery-ui.css" type="text/css" media="all" />
+        
         <!--
-        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+        <meta http-equiv="Refresh" content="5"/>
+        
+        black-tie, blitzer, cupertino, dark-hive, dot-luv, eggplant, excite-bike, 
+        flick, hot-sneaks, humanity, le-frog, mint-choc, overcast, pepper-grinder, 
+        redmond, smoothness, south-street, start, sunny, swanky-purse, trontastic, 
+        ui-darkness, ui-lightness, and vader.
+        
+        
         -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         
@@ -17,7 +26,13 @@ and open the template in the editor.
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
         <style>
             #tabs{
-                width:400px;
+                width:450px;
+                min-width:450px;
+                height:440px;
+                min-height:440px;
+                overflow:hidden;
+                overflow-style:scrollbar;
+                font-size:15px;
             }
             
             input.error{
@@ -26,6 +41,20 @@ and open the template in the editor.
             
             label.error{
                 color:red;
+                float:left;
+                clear:left;
+                width:97%;
+            }
+            
+            input[type="text"]{
+                margin-bottom:5px;
+                border-radius:5px;
+                padding-left:5px;
+                width:70px;
+            }
+            
+            #triangleForm li:first-child{
+                list-style-type: none;
             }
             
         </style>
@@ -43,8 +72,8 @@ and open the template in the editor.
                     <input type="hidden" name="s" value="0"/>
                     Calculate the area of a rectangle by providing the:
                     <ul>
-                        <li>Length: <input id="length" name="length" type="text" placeholder="Length" required /></li>
-                        <li>Width: <input name="width" placeholder="Width" required /></li>
+                        <li>Length: <input name="length" type="text" placeholder="Length" required /></li>
+                        <li>Width: <input name="width" type="text" placeholder="Width" required /></li>
                     </ul>
                     <input type="submit" value="Calculate"/>
                 </form>
@@ -54,7 +83,7 @@ and open the template in the editor.
                     <input type="hidden" name="s" value="1"/>
                     Calculate the area of a circle by providing the:
                     <ul>
-                        <li>Radius: <input name="radius" placeholder="Radius" required /></li>
+                        <li>Radius: <input name="radius" type="text" placeholder="Radius" required /></li>
                     </ul>
                     <input type="submit" value="Calculate"/>
                 </form>
@@ -64,10 +93,10 @@ and open the template in the editor.
                     <input type="hidden" name="s" value="2"/>
                     Calculate the length of a side of a triangle by providing the length of 2 sides:
                     <ul>
-                        <li style="list-style-type: none;"><img src="img/abctriangle.png"/></li>
-                        <li>Side A: <input name="a" placeholder="A"/></li>
-                        <li>Side B: <input name="b" placeholder="B"/></li>
-                        <li>Side C: <input name="c" placeholder="C"/></li>
+                        <li><img src="img/abctriangle.png"/></li>
+                        <li>Side A: <input name="a" type="text" placeholder="A"/></li>
+                        <li>Side B: <input name="b" type="text" placeholder="B"/></li>
+                        <li>Side C: <input name="c" type="text" placeholder="C"/></li>
                     </ul>
                     <input type="submit" value="Calculate"/>
                 </form>
@@ -79,7 +108,8 @@ and open the template in the editor.
         <script>
             //tabs
             $(function() {
-                $('#tabs').tabs();
+                $('#tabs').tabs().resizable().draggable();
+                $('input[type=submit]').button();
             });
 
             //validation
