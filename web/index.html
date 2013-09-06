@@ -30,6 +30,7 @@ and open the template in the editor.
                 min-width:450px;
                 height:440px;
                 min-height:440px;
+                
                 overflow:hidden;
                 overflow-style:scrollbar;
                 font-size:15px;
@@ -108,7 +109,7 @@ and open the template in the editor.
         <script>
             //tabs
             $(function() {
-                $('#tabs').tabs().resizable().draggable();
+                $('#tabs').tabs({heightStyle:'content'}).resizable().draggable();
                 $('input[type=submit]').button();
             });
 
