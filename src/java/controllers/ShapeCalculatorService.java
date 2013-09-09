@@ -57,9 +57,11 @@ public class ShapeCalculatorService {
                         result = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
                     } else {
                         if (a != NULL_VALUE) {
-                            result = Math.sqrt(Math.pow(a, 2) - Math.pow(c, 2));
+                            System.out.println("valid A");
+                            result = Math.sqrt(Math.pow(c, 2) - Math.pow(a, 2));
                         } else if (b != NULL_VALUE) {
-                            result = Math.sqrt(Math.pow(b, 2) - Math.pow(c, 2));
+                            System.out.println("valid B");
+                            result = Math.sqrt(Math.pow(c, 2) - Math.pow(b, 2));
                         } else {
                             //error
                         }
