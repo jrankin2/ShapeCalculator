@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ShapeCalculator", urlPatterns = {"/ShapeCalculator"})
 public class ShapeCalculatorController extends HttpServlet {
     private static final String RESULT_PAGE = "result.jsp";
-    private static final double NULL_VALUE = -1;
 
     /**
      * Processes requests for both HTTP

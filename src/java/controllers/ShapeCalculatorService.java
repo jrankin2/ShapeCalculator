@@ -11,6 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 public class ShapeCalculatorService {
     private static final double NULL_VALUE = -1;
     
+    private static final String WIDTH_PARAM = "width";
+    private static final String LENGTH_PARAM = "length";
+    private static final String RADIUS_PARAM = "radius";
+    private static final String A_PARAM = "a";
+    private static final String B_PARAM = "b";
+    private static final String C_PARAM = "c";
+    
+    
     public static double calculateFromRequest(HttpServletRequest request){
         double result = -1;
         String sParam = request.getParameter("s");
@@ -21,8 +29,8 @@ public class ShapeCalculatorService {
             }
             switch (shape) {
                 case RECTANGLE:
-                    double width = getParameterDouble(request, "width");
-                    double length = getParameterDouble(request, "length");
+                    double width = getParameterDouble(request, WIDTH_PARAM);
+                    double length = getParameterDouble(request, LENGTH_PARAM);
                     //double width = Double.parseDouble(request.getParameter("width"));
                     //double length = Double.parseDouble(request.getParameter("length"));
                     if (width != NULL_VALUE && length != NULL_VALUE) {
@@ -33,7 +41,7 @@ public class ShapeCalculatorService {
 
                     break;
                 case CIRCLE:
-                    double radius = getParameterDouble(request, "radius");
+                    double radius = getParameterDouble(request, RADIUS_PARAM);
                     //double radius = Double.parseDouble(request.getParameter("radius"));
                     if (radius != NULL_VALUE) {
                         result = Math.PI * Math.pow(radius, 2);
@@ -42,25 +50,16 @@ public class ShapeCalculatorService {
                     }
                     break;
                 case TRIANGLE:
-                    double a = getParameterDouble(request, "a");
-                    double b = getParameterDouble(request, "b");
-                    double c = getParameterDouble(request, "c");
-                    /*
-                     String aStr = request.getParameter("a");
-                     String bStr = request.getParameter("b");
-                     String cStr = request.getParameter("c");
-                     double a = Double.parseDouble(aStr);
-                     double b = Double.parseDouble(bStr);
-                     double c = Double.parseDouble(cStr);
-                     */
+                    double a = getParameterDouble(request, A_PARAM);
+                    double b = getParameterDouble(request, B_PARAM);
+                    double c = getParameterDouble(request, C_PARAM);
+                    
                     if (c == NULL_VALUE) {
                         result = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
                     } else {
                         if (a != NULL_VALUE) {
-                            System.out.println("valid A");
                             result = Math.sqrt(Math.pow(c, 2) - Math.pow(a, 2));
                         } else if (b != NULL_VALUE) {
-                            System.out.println("valid B");
                             result = Math.sqrt(Math.pow(c, 2) - Math.pow(b, 2));
                         } else {
                             //error
