@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,7 +38,14 @@ public class ShapeCalculatorController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             double result = ShapeCalculatorService.calculateFromRequest(request);
-            request.setAttribute("result", result);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("result", result);
+            session.setAttribute("length", request.getParameter("length"));
+            session.setAttribute("width", request.getParameter("width"));
+            session.setAttribute("radius", request.getParameter("radius"));
+            session.setAttribute("a", request.getParameter("a"));
+            session.setAttribute("b", request.getParameter("b"));
+            session.setAttribute("c", request.getParameter("c"));
             RequestDispatcher view = request.getRequestDispatcher(RESULT_PAGE);
             view.forward(request, response);
         } finally {

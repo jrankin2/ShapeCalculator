@@ -1,7 +1,10 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
+<%-- 
+    Document   : index
+    Created on : Sep 9, 2013, 9:31:36 PM
+    Author     : jrankin2
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
